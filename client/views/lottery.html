@@ -1,0 +1,21 @@
+<template name="lottery">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-4">
+				{{#if active_lottery}}
+					{{> current_lottery}}
+				{{else}}
+					{{> nolottery}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="current_lottery">
+	Current Lottery:
+</template>
+
+<template name="nolottery">
+	Sorry, no lottery active!
+</template>
