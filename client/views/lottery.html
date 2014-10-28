@@ -1,8 +1,8 @@
 <template name="lottery">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-4">
-				{{#if active_lottery}}
+			<div class="col-md-12">
+				{{#if current}}
 					{{> current_lottery}}
 				{{else}}
 					{{> nolottery}}
@@ -13,7 +13,19 @@
 </template>
 
 <template name="current_lottery">
-	Current Lottery:
+	<h1>Current Lottery ending on {{currentEndDate}}!</h1>
+	<h4>Prize Pool: {{currentPool}}g</h4>
+	<div class="row">
+		<div class="col-md-4">
+			<ul class="list-group">
+				{{#each currentUsers}}
+					<li class="list-group-item">
+						{{name}}
+					</li>
+				{{/each}}
+			</ul>
+		</div>
+	</div>
 </template>
 
 <template name="nolottery">

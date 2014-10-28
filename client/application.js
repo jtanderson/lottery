@@ -14,10 +14,30 @@ Template.hello.rendered = function(){
 }
 
 Template.lottery.helpers({
-	current_lottery: function(){
-		var lottery = Meteor.call("current_lottery");
+	current: function(){
+		return Lotteries.current();
 	}
-})
+});
+
+Template.current_lottery.helpers({
+	currentName: function(){
+		return Lotteries.current().name;
+	},
+	currentPool: function(){
+		return Lotteries.current().pool;
+	},
+	currentEndDate: function(){
+		return Lotteries.current().endDate;
+	},
+	currentUsers: function(){
+		return [
+			{name: "Necrosis"},
+			{name: "Xairknight"},
+			{name: "Rhetori"},
+			{name: "Pertorrius"}
+		];
+	}
+});
 
 Template.hello.helpers({
 	counter: function () {
@@ -26,7 +46,6 @@ Template.hello.helpers({
 		} else {
 			return 0;
 		}
-		// return Session.get("counter");
 	}
 });
 

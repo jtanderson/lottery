@@ -5,9 +5,6 @@ if ( Meteor.isServer ){
 			Counter.update(counter._id, {clicks: counter.clicks + 1});
 			console.log(Counter.find(counter._id).fetch());
 			return;
-		},
-		current_lottery: function(){
-			return Lotteries.findOne().fetch();
 		}
 	});
 }
