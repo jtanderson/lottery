@@ -3,7 +3,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				{{#if current}}
-					{{> current_lottery}}
+					{{> showLottery lott=current}}
 				{{else}}
 					{{> nolottery}}
 				{{/if}}
@@ -12,20 +12,22 @@
 	</div>
 </template>
 
-<template name="current_lottery">
-	<h1>Current Lottery ending on {{currentEndDate}}!</h1>
-	<h4>Prize Pool: {{currentPool}}g</h4>
-	<div class="row">
-		<div class="col-md-4">
-			<ul class="list-group">
-				{{#each currentUsers}}
-					<li class="list-group-item">
-						{{name}}
-					</li>
-				{{/each}}
-			</ul>
+<template name="showLottery">
+	{{#with lott}}
+		<h1>Current Lottery ending on {{endDate}}!</h1>
+		<h4>Prize Pool: {{pool}}g</h4>
+		<div class="row">
+			<div class="col-md-4">
+				<ul class="list-group">
+					{{#each users}}
+						<li class="list-group-item">
+							{{name}}
+						</li>
+					{{/each}}
+				</ul>
+			</div>
 		</div>
-	</div>
+	{{/with}}
 </template>
 
 <template name="nolottery">

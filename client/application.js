@@ -1,42 +1,28 @@
 // Subscriptions, Meteor.startup
 
-// Counter = new Mongo.Collection("counter");
-Meteor.subscribe("counter");
-Meteor.subscribe("current-lottery");
-// console.log(Counter);
-
 Tracker.autorun(function(){
-
+	// Meteor.subscribe("counter");
+	Meteor.subscribe("active-lotteries");
 });
-
-Template.hello.rendered = function(){
-
-}
 
 Template.lottery.helpers({
 	current: function(){
-		return Lotteries.current();
+		var lotto = Lotteries.current();
+		// TODO: remove this after can properly access the users attribute
+		// if ( lotto ){
+		// 	lotto.users = [
+		// 		{name: "Necrosis"},
+		// 		{name: "Xairknight"},
+		// 		{name: "Rhetori"},
+		// 		{name: "Pertorrius"}
+		// 	];
+		// }
+		return lotto;
 	}
 });
 
-Template.current_lottery.helpers({
-	currentName: function(){
-		return Lotteries.current().name;
-	},
-	currentPool: function(){
-		return Lotteries.current().pool;
-	},
-	currentEndDate: function(){
-		return Lotteries.current().endDate;
-	},
-	currentUsers: function(){
-		return [
-			{name: "Necrosis"},
-			{name: "Xairknight"},
-			{name: "Rhetori"},
-			{name: "Pertorrius"}
-		];
-	}
+Template.showLottery.helpers({
+
 });
 
 Template.hello.helpers({
