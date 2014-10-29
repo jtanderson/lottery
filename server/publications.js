@@ -4,10 +4,15 @@ Meteor.publish("counter", function(){
 	return Counter.find();
 });
 
-Meteor.publish("current-lottery", function() {
-	return Lotteries.find({active: true});
+Meteor.publish("active-lotteries", function() {
+	// return Lotteries.find({active: true});
+	return [
+		Lotteries.find({active: true}),
+		Users.find(),
+		Entries.find()
+	];
 });
 
-Meteor.publish("lotteries", function(lotteryId){
+Meteor.publish("lottery", function(lotteryId){
 	var lottery = Lotteries.find({id: lotteryId}).fetch();
 });

@@ -5,5 +5,6 @@ if ( Meteor.isServer ){
 }
 
 Lotteries.current = function(){
-	return Lotteries.findOne({active: true});
+	var lotto = Lotteries.findOne({active: true});
+	return lotto;
 }
