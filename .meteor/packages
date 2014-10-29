@@ -6,3 +6,8 @@
 meteor-platform
 insecure
 iron:router
+accounts-password
+mrt:accounts-ui-bootstrap-3
+mrt:bootstrap-3
+alanning:roles
+

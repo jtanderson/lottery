@@ -8,7 +8,6 @@ Meteor.publish("active-lotteries", function() {
 	// return Lotteries.find({active: true});
 	return [
 		Lotteries.find({active: true}),
-		Users.find(),
 		Entries.find()
 	];
 });

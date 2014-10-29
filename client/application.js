@@ -8,15 +8,6 @@ Tracker.autorun(function(){
 Template.lottery.helpers({
 	current: function(){
 		var lotto = Lotteries.current();
-		// TODO: remove this after can properly access the users attribute
-		// if ( lotto ){
-		// 	lotto.users = [
-		// 		{name: "Necrosis"},
-		// 		{name: "Xairknight"},
-		// 		{name: "Rhetori"},
-		// 		{name: "Pertorrius"}
-		// 	];
-		// }
 		return lotto;
 	}
 });
