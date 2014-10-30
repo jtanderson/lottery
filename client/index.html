@@ -11,8 +11,6 @@
 <body>
 	{{> nav}}
 
-	{{> jumbotron}}
-
 	{{renderRouter}}
 </body>
 
@@ -22,6 +20,26 @@
 		<div class="container">
 			<h1>Blissful Epidemic Lottery Time!</h1>
 			<p>This is the official (prototype) page for the weekly Blissful Epidemic Lottery. Lovingly crafted by "Pertorrius" </p>
+		</div>
+	</div>
+</template>
+
+<template name="loading">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{{>spinner}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<template name="base">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				{{>yield}}
+			</div>
 		</div>
 	</div>
 </template>

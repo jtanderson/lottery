@@ -2,7 +2,6 @@
 
 Tracker.autorun(function(){
 	// Meteor.subscribe("counter");
-	Meteor.subscribe("active-lotteries");
 });
 
 Template.lottery.helpers({

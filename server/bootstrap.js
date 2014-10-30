@@ -9,4 +9,8 @@ Meteor.startup(function(){
 			}
 		};
 	}
+
+	// if ( user = Meteor.users.findOne({email: "jtanderson31@gmail.com"}) && ! usersIsInRole(user, 'admin') ){
+		// Roles.addUsersToRoles("tQiCERR5YxCxYRe6u", "admin");
+	// }
 });

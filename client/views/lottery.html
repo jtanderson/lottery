@@ -1,35 +1,32 @@
 <template name="lottery">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				{{#if current}}
-					{{> showLottery lott=current}}
-				{{else}}
-					{{> nolottery}}
-				{{/if}}
-			</div>
-		</div>
-	</div>
+	{{> jumbotron}}
+
+	{{#if current}}
+		{{> showLottery current}}
+	{{else}}
+		{{> nolottery}}
+	{{/if}}
 </template>
 
 <template name="showLottery">
-	{{#with lott}}
-		<h1>Current Lottery ending on {{endDate}}!</h1>
-		<h4>Prize Pool: {{pool}}g</h4>
-		<div class="row">
-			<div class="col-md-4">
-				<ul class="list-group">
-					{{#each users}}
-						<li class="list-group-item">
-							{{name}}
-						</li>
-					{{/each}}
-				</ul>
-			</div>
+	<h1>Lottery ending on {{endDate}}!</h1>
+	<h4>Prize Pool: {{pool}}g</h4>
+	<div class="row">
+		<div class="col-md-4">
+			<ul class="list-group">
+				{{#each users}}
+					<li class="list-group-item">
+						{{name}}
+					</li>
+				{{/each}}
+			</ul>
 		</div>
-	{{/with}}
+	</div>
+	{{#if isAdmin currentUser}}
+		<a href="" class="btn btn-primary">LoL!</a>
+	{{/if}}
 </template>
 
 <template name="nolottery">
-	Sorry, no lottery active!
+	<div>Sorry, no lottery active!</div>
 </template>

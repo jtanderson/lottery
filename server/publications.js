@@ -15,3 +15,7 @@ Meteor.publish("active-lotteries", function() {
 Meteor.publish("lottery", function(lotteryId){
 	var lottery = Lotteries.find({id: lotteryId}).fetch();
 });
+
+Meteor.publish("all-lotteries", function(){
+	return Lotteries.find();
+});
