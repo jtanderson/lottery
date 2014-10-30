@@ -11,9 +11,23 @@ Template.lottery.helpers({
 	}
 });
 
+Template.editLottery.events({
+	'submit form': function(e){
+		e.preventDefault();
+	}
+})
+
 Template.showLottery.helpers({
 
 });
+
+Template.addLotteryUser.events({
+	'submit form': function(e){
+		e.preventDefault();
+
+		var lottery = Lotteries.findOne({id: this._id});
+	}
+})
 
 Template.hello.helpers({
 	counter: function () {

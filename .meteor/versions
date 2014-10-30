@@ -50,6 +50,7 @@ mrt:bootstrap-3@0.3.8
 npm-bcrypt@0.7.7
 observe-sequence@1.0.3
 ordered-dict@1.0.1
+percolatestudio:percolatestudio-migrations@0.7.1
 random@1.0.1
 reactive-dict@1.0.4
 reactive-var@1.0.3
