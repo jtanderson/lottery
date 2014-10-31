@@ -25,6 +25,9 @@
 				{{/each}}
 			</ul>
 		</div>
+		<div class="col-md-8 text-center">
+			[More stuff]
+		</div>
 	</div>
 	{{#if isAdmin currentUser}}
 		{{> addLotteryUser}}
@@ -46,9 +49,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label" for="name">Name</label>
+					<label class="control-label" for="name">Entry Amount (in gold)</label>
 					<div class="controls">
-						<input name="name" id="name" type="text" value="" placeholder="Name" class="form-control"/>
+						<input name="entry" id="entry" type="text" value="" placeholder="10" class="form-control"/>
 					</div>
 				</div>
 				<input type="submit" value="Submit" class="btn btn-primary"/>

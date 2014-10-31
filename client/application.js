@@ -25,7 +25,14 @@ Template.addLotteryUser.events({
 	'submit form': function(e){
 		e.preventDefault();
 
-		var lottery = Lotteries.findOne({id: this._id});
+		var lottery = Lotteries.findOne({_id: this._id});
+		var user = {name: $(e.target).find('[name=name]').val()};
+		if ( ! lottery.users ){
+			lottery.users = [];
+		}
+		lottery.users.push(user);
+		Lotteries.update(this._id, {$set: {users: lottery.users}});
+		$(e.target).find('[name=name]').val('')
 	}
 })
 
