@@ -35,9 +35,16 @@ Template.addLotteryUser.events({
 		}
 		lottery.users.push(user);
 		Lotteries.update(this._id, {$set: {users: lottery.users}});
-		$(e.target).find('[name=name]').val('')
+		$(e.target).find('[name=name],[name=entry]').val('')
 	}
-})
+});
+
+Template.showLottery.events({
+	'click .delete-user': function(e){
+		e.preventDefault();
+		Template.parentData(0).removeUser(this.name);
+	}
+});
 
 Template.hello.helpers({
 	counter: function () {

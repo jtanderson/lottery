@@ -22,7 +22,10 @@
 					<li class="list-group-item">
 						{{name}}
 						{{#if isAdmin}}
-							<div class="pull-right badge info">{{entry}}g</div>
+							<div class="pull-right">
+								<span class="badge">{{entry}}g</span>
+								<a href="#" class="btn btn-link delete-user" style="padding-top:0;padding-bottom:0;">Delete</a>
+							</div>
 						{{/if}}
 					</li>
 				{{/each}}
@@ -54,7 +57,7 @@
 				<div class="form-group">
 					<label class="control-label" for="name">Entry Amount (in gold)</label>
 					<div class="controls">
-						<input name="entry" id="entry" type="number" value="" placeholder="10" class="form-control"/>
+						<input name="entry" id="entry" type="number" value="{{defaultEntryAmount}}" placeholder="10" class="form-control"/>
 					</div>
 				</div>
 				<input type="submit" value="Submit" class="btn btn-primary"/>
