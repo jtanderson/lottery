@@ -14,13 +14,16 @@
 
 <template name="showLottery">
 	<h1>Lottery ending on {{endDate}}!</h1>
-	<h4>Prize Pool: {{pool}}g</h4>
+	<h4>Prize Pool: {{totalPool}}g</h4>
 	<div class="row">
 		<div class="col-md-4">
 			<ul class="list-group">
 				{{#each users}}
 					<li class="list-group-item">
 						{{name}}
+						{{#if isAdmin}}
+							<div class="pull-right badge info">{{entry}}g</div>
+						{{/if}}
 					</li>
 				{{/each}}
 			</ul>
@@ -51,7 +54,7 @@
 				<div class="form-group">
 					<label class="control-label" for="name">Entry Amount (in gold)</label>
 					<div class="controls">
-						<input name="entry" id="entry" type="text" value="" placeholder="10" class="form-control"/>
+						<input name="entry" id="entry" type="number" value="" placeholder="10" class="form-control"/>
 					</div>
 				</div>
 				<input type="submit" value="Submit" class="btn btn-primary"/>

@@ -8,4 +8,30 @@ Migrations.add({
 			Roles.addUsersToRoles(user._id, "admin");
 		}
 	}
+});
+
+Migrations.add({
+	version: 2,
+	name: "Add users array to each lottery.",
+	up: function(){
+		for (var i = Lotteries.find().fetch().length - 1; i >= 0; i--) {
+			var lot = Lotteries.find().fetch()[i];
+			if ( ! lot.hasOwnProperty("users") ){
+				Lotteries.update(lot._id, {$set: {users: []}});
+			}
+		};
+	}
+})
+
+Migrations.add({
+	version: 3,
+	name: "Add defaultEntryAmount to each lottery.",
+	up: function(){
+		for (var i = Lotteries.find().fetch().length - 1; i >= 0; i--) {
+			var lot = Lotteries.find().fetch()[i];
+			if ( ! lot.hasOwnProperty("defaultEntryAmount") ){
+				Lotteries.update(lot._id, {$set: {defaultEntryAmount: 0}});
+			}
+		};
+	}
 })

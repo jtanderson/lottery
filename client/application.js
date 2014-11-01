@@ -26,7 +26,10 @@ Template.addLotteryUser.events({
 		e.preventDefault();
 
 		var lottery = Lotteries.findOne({_id: this._id});
-		var user = {name: $(e.target).find('[name=name]').val()};
+		var user = {
+			name: $(e.target).find('[name=name]').val(),
+			entry: $(e.target).find('[name=entry]').val()
+		};
 		if ( ! lottery.users ){
 			lottery.users = [];
 		}
