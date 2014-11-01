@@ -32,7 +32,11 @@
 			</ul>
 		</div>
 		<div class="col-md-8 text-center">
-			[More stuff]
+			{{#if isAdmin}}
+				{{> editComments}}
+			{{else}}
+				{{comments}}
+			{{/if}}
 		</div>
 	</div>
 	{{#if isAdmin currentUser}}
@@ -68,4 +72,16 @@
 
 <template name="editLottery">
 	<h1>Edit Lottery</h1>
+</template>
+
+<template name="editComments">
+	<form class="main form">
+		<div class="form-group">
+			<!-- <label class="control-label" for="name">Name</label> -->
+			<div class="controls">
+				<textarea name="comments" id="" cols="100" rows="10">{{comments}}</textarea>
+			</div>
+		</div>
+		<input type="submit" value="Save" class="btn btn-primary"/>
+	</form>
 </template>

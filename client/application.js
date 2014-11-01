@@ -46,6 +46,15 @@ Template.showLottery.events({
 	}
 });
 
+Template.editComments.events({
+	'submit form': function(e){
+		e.preventDefault();
+
+		Lotteries.update(this._id, {$set: {comments: $(e.target).find('textarea').val() }});
+		console.log(this);
+	}
+})
+
 Template.hello.helpers({
 	counter: function () {
 		if ( Counter.find().count() > 0 ){
