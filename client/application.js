@@ -53,7 +53,13 @@ Template.editComments.events({
 		Lotteries.update(this._id, {$set: {comments: $(e.target).find('textarea').val() }});
 		console.log(this);
 	}
-})
+});
+
+Template.admin.events({
+	'click button.delete': function(e){
+		e.preventDefault();
+	}
+});
 
 Template.hello.helpers({
 	counter: function () {

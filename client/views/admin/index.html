@@ -1,5 +1,26 @@
 <template name="admin">
-	{{#each lotteries}}
-		{{name}}
-	{{/each}}
+	<h1>Admin Dashboard</h1>
+	<hr>
+	<h2>Lotteries</h2>
+	<table class="table table-hover">
+		<tr>
+			<th>Name</th>
+			<th>Pool</th>
+			<th></th>
+		</tr>
+		<tbody>
+			{{#each lotteries}}
+				<tr>
+					<td>{{name}}</td>
+					<td>{{totalPool}}</td>
+					<td>
+						<div class="text-right">
+							<a href="{{pathFor 'showLottery'}}" name="view" class="btn btn-link" style="margin-top: 0;margin-bottom:0;padding-top:0;padding-bottom:0;">details</a>
+							<a href="#" name="delete" class="btn btn-link" style="margin-top: 0;margin-bottom:0;padding-top:0;padding-bottom:0;">delete</a>
+						</div>
+					</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
 </template>
