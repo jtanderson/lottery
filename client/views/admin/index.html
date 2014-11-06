@@ -1,28 +1,52 @@
 <template name="admin">
-	<h1>Admin Dashboard</h1>
-	<hr>
-	<h2>Lotteries</h2>
-	<table class="table table-hover">
-		<tr>
-			<th>Name</th>
-			<th>Ending</th>
-			<th>Pool</th>
-			<th></th>
-		</tr>
-		<tbody>
-			{{#each lotteries}}
+	<div class="row" style="margin-top: 20px;">
+		<div class="col-md-10 col-md-offset-1">
+			<div class="alert alert-warning alert-dismissable">
+				<button type="button" class="close" data-dismiss="alert">
+					<span aria-hidden="true">&times;</span>
+					<span class="sr-only">Close</span>
+				</button>
+				<strong>Warning!</strong> This is the earliest usable version of this system. As such, it has <strong>no</strong> input validation, either client- or server-side, and you should take great care when entering data that it conforms to whatever "type" it should be. That is, you have the ability to entery text into number inputs, but if you do, it will break any calculations that use that that number.
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h1>Admin Dashboard</h1>
+			<hr>
+			<h2>Lotteries</h2>
+			<table class="table table-hover">
 				<tr>
-					<td>{{name}}</td>
-					<td>{{endDate}}</td>
-					<td>{{totalPool}}</td>
-					<td>
-						<div class="text-right">
-							<a href="{{pathFor 'showLottery'}}" name="view" class="btn btn-link" style="margin-top: 0;margin-bottom:0;padding-top:0;padding-bottom:0;">details</a>
-							<a href="#" name="delete" class="btn btn-link" style="margin-top: 0;margin-bottom:0;padding-top:0;padding-bottom:0;">delete</a>
-						</div>
-					</td>
+					<th>Ending</th>
+					<th>Pool</th>
+					<th>Show on Home Page</th>
+					<th></th>
 				</tr>
-			{{/each}}
-		</tbody>
-	</table>
+				<tbody>
+					{{#each lotteries}}
+						<tr>
+							<td>{{endDate}}</td>
+							<td>{{totalPool}}</td>
+							<td>{{> homePageToggle}}</td>
+							<td>
+								<div class="text-right">
+									<a href="{{pathFor 'showLottery'}}" name="view" class="btn btn-link" style="margin-top: 0;margin-bottom:0;padding-top:0;padding-bottom:0;">details</a>
+									<a href="#" name="delete" class="btn btn-link" style="margin-top: 0;margin-bottom:0;padding-top:0;padding-bottom:0;">delete</a>
+								</div>
+							</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</div>
+	</div>
+	{{> lotteryCreate}}
+</template>
+
+<template name="homePageToggle">
+	{{#if onHomePage}}
+		<input type="checkbox" name="onHomePageRadio" checked>
+	{{else}}
+		<input type="checkbox" name="onHomePageRadio">
+	{{/if}}
 </template>

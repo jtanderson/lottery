@@ -4,7 +4,6 @@ Migrations.add({
 	up: function(){
 		var user = Meteor.users.findOne({"emails.address": "jtanderson31@gmail.com"});
 		if ( user && ! Roles.userIsInRole(user, 'admin') ){
-			console.log("Adding jtanderson31@gmail.com to the admin role...");
 			Roles.addUsersToRoles(user._id, "admin");
 		}
 	}
@@ -21,7 +20,7 @@ Migrations.add({
 			}
 		};
 	}
-})
+});
 
 Migrations.add({
 	version: 3,
@@ -31,6 +30,27 @@ Migrations.add({
 			var lot = Lotteries.find().fetch()[i];
 			if ( ! lot.hasOwnProperty("defaultEntryAmount") ){
 				Lotteries.update(lot._id, {$set: {defaultEntryAmount: 0}});
+			}
+		};
+	}
+});
+
+Migrations.add({
+	version: 4,
+	name: "Move lottery.users to LotteryUsers collection",
+	up: function(){
+		var lotteries = Lotteries.find().fetch();
+		for (var i = lotteries.length - 1; i >= 0; i--) {
+			if ( lotteries[i].users ){
+				for (var j = lotteries[i].users.length - 1; j >= 0; j--) {
+					// lotteries[i].users[j]
+					var lotteryuser = _.clone(lotteries[i].users[j]);
+					_.extend(lotteryuser, {
+						lottery_id: lotteries[i]._id
+					});
+					LotteryUsers.insert(lotteryuser);
+					Lotteries.update(lotteries[i]._id, {$unset: {users: ""}});
+				};
 			}
 		};
 	}

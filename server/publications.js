@@ -7,15 +7,27 @@ Meteor.publish("counter", function(){
 Meteor.publish("active-lotteries", function() {
 	// return Lotteries.find({active: true});
 	return [
-		Lotteries.find({active: true}),
-		Entries.find()
+		Lotteries.find(),
+	];
+});
+
+Meteor.publish("homepage-lotteries", function(){
+	return [
+		Lotteries.find({onHomePage: true}),
+		LotteryUsers.find()
 	];
 });
 
 Meteor.publish("lottery", function(lotteryId){
-	var lottery = Lotteries.find({id: lotteryId}).fetch();
+	return [
+		Lotteries.find({_id: lotteryId}),
+		LotteryUsers.find({lottery_id: lotteryId})
+	];
 });
 
 Meteor.publish("all-lotteries", function(){
-	return Lotteries.find();
+	return [
+		Lotteries.find(),
+		LotteryUsers.find()
+	];
 });
