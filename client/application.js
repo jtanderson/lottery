@@ -59,6 +59,14 @@ Template.showLottery.events({
 	}
 });
 
+Template.showLottery.helpers({
+	userIsWinner: function(){
+		if ( this.winner ){
+			return "alert alert-success";
+		}
+	}
+})
+
 Template.editComments.events({
 	'submit form': function(e){
 		e.preventDefault();
@@ -83,23 +91,5 @@ Template.admin.events({
 		} else {
 			Lotteries.update(this._id, {$set: {onHomePage: false}});
 		}
-	}
-});
-
-Template.hello.helpers({
-	counter: function () {
-		if ( Counter.find().count() > 0 ){
-			return Counter.findOne().clicks;
-		} else {
-			return 0;
-		}
-	}
-});
-
-Template.hello.events({
-	'click button': function () {
-		// increment the counter when button is clicked
-		var counter = Counter.findOne();
-		Meteor.call("increment", counter);
 	}
 });
