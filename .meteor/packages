@@ -12,4 +12,5 @@ mrt:bootstrap-3
 sacha:spin
 alanning:roles
 percolatestudio:percolatestudio-migrations
+force-ssl
 
