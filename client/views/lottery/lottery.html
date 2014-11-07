@@ -41,14 +41,14 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-4">
-			{{#if isAdmin currentUser}}
+		{{#if isAdmin}}
+			<div class="col-md-4">
 				{{> addLotteryUser}}
-			{{/if}}
-		</div>
-		<div class="col-md-8 text-center" style="margin-top: 100px;">
-			<a href="#" class="btn btn-block btn-danger" name="winnerbutton"><h2>Choose Winner</h2></a>
-		</div>
+			</div>
+			<div class="col-md-8 text-center" style="margin-top: 100px;">
+				<a href="#" class="btn btn-block btn-danger" name="winnerbutton"><h2>Choose Winner</h2></a>
+			</div>
+		{{/if}}
 	</div>
 </template>
 

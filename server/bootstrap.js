@@ -24,4 +24,16 @@ Meteor.startup(function(){
 			return isAdmin();
 		}
 	});
+
+	Meteor.users.allow({
+		insert: function(){
+			return isAdmin()
+		},
+		update: function(){
+			return isAdmin();
+		},
+		remove: function(){
+			return isAdmin();
+		}
+	});
 });

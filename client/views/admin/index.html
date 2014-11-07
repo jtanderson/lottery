@@ -6,7 +6,7 @@
 					<span aria-hidden="true">&times;</span>
 					<span class="sr-only">Close</span>
 				</button>
-				<strong>Warning!</strong> This is the earliest usable version of this system. As such, it has <strong>no</strong> input validation, either client- or server-side, and you should take great care when entering data that it conforms to whatever "type" it should be. That is, you have the ability to entery text into number inputs, but if you do, it will break any calculations that use that that number.
+				<strong>Warning!</strong> This is the earliest usable version of this system. As such, it has <strong>no</strong> input validation, either client- or server-side, and you should take great care when entering data that it conforms to whatever "type" it should be. That is, you have the ability to enter text into number inputs, but if you do, it will break any calculations that use that that number.
 			</div>
 		</div>
 	</div>
@@ -38,6 +38,22 @@
 					{{/each}}
 				</tbody>
 			</table>
+			<hr>
+			<h2>Users</h2>
+			<table class="table table-hover">
+				<tr>
+					<th>Email</th>
+					<th>Admin?</th>
+				</tr>
+				<tbody>
+					{{#each users}}
+						<tr>
+							<td>{{userEmail}}</td>
+							<td>{{> adminToggle}}</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
 		</div>
 	</div>
 	{{> lotteryCreate}}
@@ -48,5 +64,13 @@
 		<input type="checkbox" name="onHomePageRadio" checked>
 	{{else}}
 		<input type="checkbox" name="onHomePageRadio">
+	{{/if}}
+</template>
+
+<template name="adminToggle">
+	{{#if userIsAdmin}}
+		<input type="checkbox" name="adminRadio" checked>
+	{{else}}
+		<input type="checkbox" name="adminRadio">
 	{{/if}}
 </template>

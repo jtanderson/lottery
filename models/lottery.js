@@ -4,7 +4,4 @@ if ( Meteor.isServer ){
 	});
 }
 
-Lotteries.current = function(){
-	var lotto = Lotteries.findOne({active: true});
-	return lotto;
-}
+

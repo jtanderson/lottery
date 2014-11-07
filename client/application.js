@@ -91,5 +91,30 @@ Template.admin.events({
 		} else {
 			Lotteries.update(this._id, {$set: {onHomePage: false}});
 		}
+	},
+	'change input[name=adminRadio]': function(e){
+		e.preventDefault();
+		if ( Roles.userIsInRole(this._id, 'admin') ){
+			// Meteor.call("removeAdminRole", this._id);
+			Roles.removeUsersFromRoles(this._id, 'admin');
+		} else {
+			// Meteor.call("addAdminRole", this._id);
+			Roles.addUsersToRoles(this._id, 'admin');
+		}
+	}
+});
+
+Template.admin.helpers({
+	users: function(){
+		return Meteor.users.find().fetch();
+	},
+	userEmail: function(user){
+		return this.emails[0].address;
+	}
+});
+
+Template.adminToggle.helpers({
+	userIsAdmin: function(){
+		return Roles.userIsInRole(this._id, 'admin');
 	}
 });
