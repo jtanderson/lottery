@@ -18,9 +18,9 @@
 	<div class="row">
 		<div class="col-md-4">
 			<h4>Current Participants</h4>
-			<ul class="list-group">
+			<ul class="list-group lotteryuser-list">
 				{{#each users}}
-					<li class="list-group-item {{userIsWinner}}">
+					<li id="{{_id}}" class="list-group-item lotteryuser {{userIsWinner}}">
 						{{name}}
 						{{#if isAdmin}}
 							<div class="pull-right">

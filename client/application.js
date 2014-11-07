@@ -62,7 +62,8 @@ Template.showLottery.events({
 Template.showLottery.helpers({
 	userIsWinner: function(){
 		if ( this.winner ){
-			return "alert alert-success";
+			return "alert alert-success winner";
+			// return "winner";
 		}
 	}
 })
@@ -95,10 +96,8 @@ Template.admin.events({
 	'change input[name=adminRadio]': function(e){
 		e.preventDefault();
 		if ( Roles.userIsInRole(this._id, 'admin') ){
-			// Meteor.call("removeAdminRole", this._id);
 			Roles.removeUsersFromRoles(this._id, 'admin');
 		} else {
-			// Meteor.call("addAdminRole", this._id);
 			Roles.addUsersToRoles(this._id, 'admin');
 		}
 	}
