@@ -28,7 +28,8 @@ Template.addLotteryUser.events({
 		};
 
 		LotteryUsers.insert(user);
-		$(e.target).find('[name=name],[name=entry]').val('');
+		$(e.target).find('[name=name]').val('');
+		$(e.target).find('[name=entry]').val(this.defaultEntryAmount || '');
 	}
 });
 
@@ -39,7 +40,6 @@ Template.lotteryCreate.events({
 		var id = Lotteries.insert({
 			endDate: $(e.target).find('[name=endDate]').val(),
 			active: true,
-			users: [],
 			onHomePage: false,
 			defaultEntryAmount: $(e.target).find('[name=defaultEntryAmount]').val()
 		});
