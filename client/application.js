@@ -41,6 +41,7 @@ Template.lotteryCreate.events({
 			endDate: $(e.target).find('[name=endDate]').val(),
 			active: true,
 			onHomePage: false,
+			bonus: $(e.target).find('[name=bonus]').val(),
 			defaultEntryAmount: $(e.target).find('[name=defaultEntryAmount]').val()
 		});
 

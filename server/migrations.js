@@ -54,4 +54,15 @@ Migrations.add({
 			}
 		};
 	}
-})
+});
+
+Migrations.add({
+	version: 5,
+	name: "Add field for bonus pool",
+	up: function(){
+		var lotteries = Lotteries.find().fetch();
+		for ( var i = lotteries.length - 1; i >= 0; i--) {
+			Lotteries.update(lotteries[i]._id, {$set: {bonus: 0}});
+		}
+	}
+});
