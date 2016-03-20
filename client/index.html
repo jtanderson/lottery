@@ -1,53 +1,59 @@
 <head>
-	<title>blislottery</title>
-	<style>
-		body {
-			padding-top: 50px;
-			padding-bottom: 20px;
-		}
-	</style>
+  <title>blislottery</title>
+  <style>
+    body {
+      padding-top: 50px;
+      padding-bottom: 20px;
+    }
+  </style>
 </head>
 
 <body>
-	{{> nav}}
+  {{> nav}}
 
-	{{renderRouter}}
+  {{renderRouter}}
+
+  {{> footer}}
 </body>
 
 <template name="jumbotron">
-	<!-- Main jumbotron for a primary marketing message or call to action -->
-	<div class="jumbotron">
-		<div class="container">
-			<h1>Blissful Epidemic Lottery Time!</h1>
-			<p>This is the official (prototype) page for the weekly Blissful Epidemic Lottery. Lovingly crafted by "DasMoose" </p>
-		</div>
-	</div>
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Blissful Epidemic Lottery Time!</h1>
+      <p>This is the official (prototype) page for the weekly Blissful Epidemic Lottery. Lovingly crafted by "DasMoose" </p>
+    </div>
+  </div>
 </template>
 
 <template name="loading">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12" style="margin-top: 50px;">
-				{{> spinner}}
-			</div>
-		</div>
-	</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12" style="margin-top: 50px;">
+        {{> spinner}}
+      </div>
+    </div>
+  </div>
 </template>
 
 <template name="base">
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				{{> yield}}
-			</div>
-		</div>
-	</div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        {{> yield}}
+      </div>
+    </div>
+  </div>
 </template>
 
 <template name="footer">
-	<div class="container">
-		<div class="col-md-12">
-			<hr>
-		</div>
-	</div>
+  <footer class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+        <a href="https://github.com/jtanderson/lottery">Check out the code on Github</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </template>
