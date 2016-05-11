@@ -15,7 +15,6 @@ force-ssl
 twbs:bootstrap
 ian:accounts-ui-bootstrap-3
 chuangbo:marked
-standard-minifiers
 meteor-base
 mobile-experience
 mongo
@@ -30,3 +29,5 @@ ejson
 spacebars
 check
 huttonr:bootstrap3
+standard-minifier-css
+standard-minifier-js
