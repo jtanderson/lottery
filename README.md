@@ -23,6 +23,8 @@ Follow steps on https://github.com/jeeeyul/meteor-openshift
 - [ ] Add a list of raids, or raid homepage, etc.
 - [ ] Add a general "suggestion-box"
   - [ ] Allow categories of suggestions (raid request, general, wvw, etc.)
+- [ ] Update Admin UI for raids and suggestions
+- [ ] Integrate QuillJS into the textareas for ease of use
 - [ ] Track un-signed-in users via cookies for the purpose of raid sign-ups
 - [ ] Move business logic from application.js onto the server, to prevent potential tampering
 - [ ] Better UI
