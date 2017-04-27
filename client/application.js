@@ -129,6 +129,9 @@ Template.showRaid.events({
     e.preventDefault();
 
     var charName = window.prompt("Enter your character name.", "");
+    if ( charName == null ){
+      return false;
+    }
     RaidRoles.update(this._id, {$set: {playerName: charName, user_id: Meteor.userId()}});
   },
   'click .leave-raid-role': function(e){
@@ -141,7 +144,10 @@ Template.showRaid.events({
   'click .admin-fill-raid-role': function(e){
     e.preventDefault();
 
-    var charName = window.prompt("Enter a character name.", "");
+    var charName = window.prompt("Enter a character name (leave blank to erase existing).", "");
+    if ( charName == null ){
+      return false;
+    }
     RaidRoles.update(this._id, {$set: {playerName: charName}});
   }
 });
