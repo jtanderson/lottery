@@ -128,16 +128,38 @@ Template.showRaid.events({
   'click .fill-raid-role': function(e){
     e.preventDefault();
 
-    var charName = window.prompt("Enter your character name.", "");
-    if ( charName == null ){
+    var defaultName = "";
+    var localName = localStorage.getItem("raidSignupName");
+    var uid = Meteor.userId();
+
+    if ( localName !== null ){
+      defaultName = localName;
+    } else if ( uid !== null ){
+      //defaultName = RaidRoles.findOne({raid_id: this.raid_id, user_id: uid}).playerName;
+    }
+
+    var charName = window.prompt("Enter your character name.", defaultName);
+    if ( charName == null || charName == "" ){
       return false;
     }
-    RaidRoles.update(this._id, {$set: {playerName: charName, user_id: Meteor.userId()}});
+
+    if ( uid == null ){
+      uid = 0;
+      // Set cookie so we can remember this browser, since they're not using an account
+      if ( localStorage.getItem('raidSignupId') == null ){
+        localStorage.setItem('raidSignupId', randomString(16));
+      }
+      localStorage.setItem('raidSignupName', charName);
+    } else {
+      clearLocalRaidStorage();
+    }
+
+    RaidRoles.update(this._id, {$set: {playerName: charName, user_id: uid}});
   },
   'click .leave-raid-role': function(e){
     e.preventDefault();
 
-    if ( this.user_id == Meteor.userId() ){
+    if ( this.user_id == Meteor.userId() || localStorage.getItem('raidSignupName') == this.playerName ){
       RaidRoles.update(this._id, {$set: {playerName: "", user_id: 0}});
     }
   },
@@ -154,10 +176,12 @@ Template.showRaid.events({
 
 Template.showRaid.helpers({
   userCanFillRole: function(){
-    return !this.Raid().hasUser(Meteor.userId()) && this.playerName == "" && this.user_id == 0;
+    cachedSignup = this.Raid().hasPlayer(localStorage.getItem('raidSignupName'));
+    return !this.Raid().hasUser(Meteor.userId()) && this.playerName == "" && this.user_id == 0 && !cachedSignup;
   },
   userFillingRole: function(){
-    return this.user_id == Meteor.userId();
+    rtn = this.user_id == Meteor.userId() || localStorage.getItem('raidSignupName') == this.playerName;
+    return rtn;
   },
   openSpots: function(){
     return RaidRoles.find({raid_id: this._id}).count() - RaidRoles.find(
