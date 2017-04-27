@@ -20,6 +20,9 @@ Follow steps on https://github.com/jeeeyul/meteor-openshift
 ## TODO:
 
 - [ ] Clean up text/titles from lottery to a more generally approachable site
+- [ ] Add a list of raids, or raid homepage, etc.
+- [ ] Add a general "suggestion-box"
+  - [ ] Allow categories of suggestions (raid request, general, wvw, etc.)
 - [ ] Track un-signed-in users via cookies for the purpose of raid sign-ups
 - [ ] Move business logic from application.js onto the server, to prevent potential tampering
 - [ ] Better UI
@@ -29,5 +32,5 @@ Follow steps on https://github.com/jeeeyul/meteor-openshift
 - [ ] User profile features
   - [ ] Store characters to sign up for raids
   - [ ] UI/permissions
-- Route helpers to enforce resource permissions
+- [ ] Route helpers to enforce resource permissions
 
