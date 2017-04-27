@@ -73,7 +73,7 @@ Template.editComments.events({
   'submit form': function(e){
     e.preventDefault();
 
-    Lotteries.update(this._id, {$set: {comments: $(e.target).find('textarea').val() }});
+    this.setComments($(e.target).find('textarea').val());
   }
 });
 
@@ -116,5 +116,104 @@ Template.admin.helpers({
 Template.adminToggle.helpers({
   userIsAdmin: function(){
     return Roles.userIsInRole(this._id, 'admin');
+  }
+});
+
+
+Template.showRaid.events({
+  'click .delete-user': function(e){
+    e.preventDefault();
+    RaidRoles.remove(this._id);
+  },
+  'click .fill-raid-role': function(e){
+    e.preventDefault();
+
+    var charName = window.prompt("Enter your character name.", "");
+    RaidRoles.update(this._id, {$set: {playerName: charName, user_id: Meteor.userId()}});
+  },
+  'click .leave-raid-role': function(e){
+    e.preventDefault();
+
+    if ( this.user_id == Meteor.userId() ){
+      RaidRoles.update(this._id, {$set: {playerName: "", user_id: 0}});
+    }
+  },
+  'click .admin-fill-raid-role': function(e){
+    e.preventDefault();
+
+    var charName = window.prompt("Enter a character name.", "");
+    RaidRoles.update(this._id, {$set: {playerName: charName}});
+  }
+});
+
+Template.showRaid.helpers({
+  userCanFillRole: function(){
+    return !this.Raid().hasUser(Meteor.userId()) && this.playerName == "" && this.user_id == 0;
+  },
+  userFillingRole: function(){
+    return this.user_id == Meteor.userId();
+  },
+  openSpots: function(){
+    return RaidRoles.find({raid_id: this._id}).count() - RaidRoles.find(
+      {$and:
+        [
+          {raid_id: this._id},
+          {$or: 
+            [
+              {playerName: {$ne: ""}},
+              {user_id: {$ne: 0}}
+            ]
+          }
+        ]
+      }
+    ).count();
+  }
+});
+
+Template.raidCreate.onRendered(function(){
+  this.$('.datetimepicker').datetimepicker();
+  Session.set('selected-wing', $('select#wing').val());
+});
+
+Template.raidCreate.helpers({
+  raidWings: function(){
+    return RaidWings.find().fetch();
+  },
+  raidWingEncounters: function(){
+    encounters = RaidWingEncounters.find({raidwing_id: Session.get('selected-wing')});
+    return encounters;
+  }
+});
+
+Template.raidCreate.events({
+  'submit form': function(e){
+    e.preventDefault();
+
+    var id = Raids.insert({
+      startTime: new Date(Date.parse($(e.target).find('[name=startTime]').val())).toISOString(),
+      raidwing_id: $(e.target).find('select#wing').val(),
+      raidwingencounter_id: $(e.target).find('select#encounter').val()
+    });
+
+    Router.go('/raid/'+id);
+  },
+  'change select#wing': function(e){
+    Session.set('selected-wing', $('select#wing').val());
+  }
+});
+
+Template.addRaidRole.events({
+  'submit form': function(e){
+    e.preventDefault();
+
+    var role = {
+      raid_id: this._id,
+      name: $(e.target).find('[name=name]').val(),
+      playerName: "",
+      user_id: 0
+    };
+
+    RaidRoles.insert(role);
+    $(e.target).find('[name=name]').val('');
   }
 });

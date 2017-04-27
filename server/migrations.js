@@ -71,3 +71,53 @@ Migrations.add({
     }
   }
 });
+
+Migrations.add({
+  version: 6,
+  name: "Add raid wings and encounters",
+  up: function(){
+    raidObjs = [
+      {
+        name: "Spirit Vale",
+        encounters: [
+          "Vale Guardian",
+          "Gorseval the Multifarious",
+          "Sabetha the Saboteur"
+        ]
+      },
+      {
+        name: "Salvation Pass",
+        encounters: [
+          "Slothasor",
+          "Prison Camp",
+          "Matthias Gabriel"
+        ]
+      },
+      {
+        name: "Stronghold of the Faithful",
+        encounters: [
+          "Siege of the Stronghold",
+          "Keep Construct",
+          "Xera"
+        ]
+      },
+      {
+        name: "Bastion of the Penitent",
+        encounters: [
+          "Cairn the Indomitable",
+          "Mursaat Overseer",
+          "Samarog",
+          "Deimos"
+        ]
+      }
+    ];
+
+    var raid_id;
+    for (var i = raidObjs.length - 1; i >= 0; i--) {
+      raid_id = RaidWings.insert({ name: raidObjs[i].name });
+      for (var j = raidObjs[i].encounters.length - 1; j >= 0; j--){
+        RaidWingEncounters.insert({ name: raidObjs[i].encounters[j], raidwing_id: raid_id });
+      }
+    }
+  }
+});
