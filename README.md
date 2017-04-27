@@ -29,4 +29,5 @@ Follow steps on https://github.com/jeeeyul/meteor-openshift
 - [ ] User profile features
   - [ ] Store characters to sign up for raids
   - [ ] UI/permissions
+- Route helpers to enforce resource permissions
 
