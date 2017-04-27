@@ -1,5 +1,5 @@
-<template name="raid">
-  {{> jumbotron}}
+<template name="raidHome">
+  {{> raidJumbotron}}
 
   {{#if next}}
     {{> showRaid next}}
@@ -9,6 +9,13 @@
     {{else}}
       {{> noraid}}
     {{/if}}
+  {{/if}}
+
+  {{#if anyUpcoming}}
+    <br>
+    <br>
+    <br>
+    {{> upcomingRaidsTemplate}}
   {{/if}}
 </template>
 
@@ -81,11 +88,10 @@
 </template>
 
 <template name="addRaidRole">
-  <form class="main form">
+  <form class="main form form-inline">
     <div class="form-group">
-      <label class="control-label" for="name">Name</label>
       <div class="controls">
-        <input name="name" id="name" type="text" value="" placeholder="Name" class="form-control"/>
+        <input name="name" id="name" type="text" value="" placeholder="New Role" class="form-control"/>
       </div>
     </div>
     <input type="submit" value="Submit" class="btn btn-primary"/>
@@ -132,4 +138,43 @@
       </form>
     </div>
   </div>
+</template>
+
+<template name="raidJumbotron">
+  <!-- Main jumbotron for a primary marketing message or call to action -->
+  <div class="jumbotron">
+    <div class="container">
+      <h1>Blissful Epidemic Raids</h1>
+      <p class="lead">More info here...</p>
+    </div>
+  </div>
+</template>
+
+<template name="upcomingRaidsTemplate">
+  <h2>Upcoming Raids</h2>
+  <hr>
+  <table class="table table-table-bordered">
+    <thead>
+      <tr>
+        <th>Wing</th>
+        <th>Boss</th>
+        <th>Time</th>
+        <th>Open Spots</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each upcomingRaids}}
+        <tr>
+          <td>{{wingName}}</td>
+          <td>{{bossName}}</td>
+          <td>{{friendlyStartTime}}</td>
+          <td>{{openSpots}}</td>
+          <td>
+            <a class="btn btn-link" href="{{pathFor 'showRaid'}}">View</a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
 </template>

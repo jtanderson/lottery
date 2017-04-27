@@ -182,21 +182,6 @@ Template.showRaid.helpers({
   userFillingRole: function(){
     rtn = this.user_id == Meteor.userId() || localStorage.getItem('raidSignupName') == this.playerName;
     return rtn;
-  },
-  openSpots: function(){
-    return RaidRoles.find({raid_id: this._id}).count() - RaidRoles.find(
-      {$and:
-        [
-          {raid_id: this._id},
-          {$or: 
-            [
-              {playerName: {$ne: ""}},
-              {user_id: {$ne: 0}}
-            ]
-          }
-        ]
-      }
-    ).count();
   }
 });
 
@@ -245,5 +230,21 @@ Template.addRaidRole.events({
 
     RaidRoles.insert(role);
     $(e.target).find('[name=name]').val('');
+  }
+});
+
+Template.raidHome.helpers({
+  next: function(){
+    return Raids.getNext();
+  },
+  anyUpcoming: function(){
+    console.log(Raids.getFuture().length > 0);
+    return Raids.getFuture().length > 0;
+  }
+});
+
+Template.upcomingRaidsTemplate.helpers({
+  upcomingRaids: function(){
+    return Raids.getFuture();
   }
 });

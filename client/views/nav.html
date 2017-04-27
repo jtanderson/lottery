@@ -12,11 +12,12 @@
       </div>
       <div class="navbar-collapse collapse">
         <div class="navbar-collapse collapse">
-          {{#if isAdmin}}
-            <ul class="nav navbar-nav">
+          <ul class="nav navbar-nav">
+            <li><a href="{{pathFor 'raid'}}">Raids</a></li>
+            {{#if isAdmin}}
               <li class=""><a href="{{pathFor 'admin'}}">Admin Panel</a></li>
-            </ul>
-          {{/if}}
+            {{/if}}
+          </ul>
           <ul class="nav navbar-nav navbar-right">
             {{> loginButtons }}
           </ul>
