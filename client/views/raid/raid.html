@@ -1,0 +1,135 @@
+<template name="raid">
+  {{> jumbotron}}
+
+  {{#if next}}
+    {{> showRaid next}}
+  {{else}}
+    {{#if isAdmin}}
+      {{> raidCreate}}
+    {{else}}
+      {{> noraid}}
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="showRaid">
+  <h1>Raid on {{friendlyStartTime}}!</h1>
+  <h2>{{wingName}} -- {{bossName}}</h2>
+  <h4>Open Spots: {{openSpots}}</h4>
+  <div class="row">
+    <div class="col-md-6">
+      <h4>Current Roster</h4>
+      <table class="table table-bordered raiduser-list">
+        <thead>
+          <tr>
+          <th>User</th>
+          <th>Role</th>
+          <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        {{#each roles}}
+          <tr>
+            <td>
+              {{playerName}}
+            </td>
+            <td id="{{_id}}" class="raiduser">
+              {{name}}
+            </td>
+            <td>
+              {{#if userCanFillRole}}
+                <a class="btn btn-link fill-raid-role" href="#">Sign Up</a>
+              {{/if}}
+              {{#if userFillingRole}}
+                <a href="#" class="btn btn-link leave-raid-role">Leave</a>
+              {{/if}}
+              {{#if isAdmin}}
+                <a href="#" class="btn btn-link delete-user" style="padding-top:0;padding-bottom:0;">Delete</a>
+                <a href="#" class="btn btn-link admin-fill-raid-role">Admin Adjust</a>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-6">
+      {{#with comments}}
+        {{{processMarkdown}}}
+      {{/with}}
+      {{#if isAdmin}}
+        {{> editComments}}
+      {{/if}}
+    </div>
+  </div>
+  <div class="row">
+    {{#if isAdmin}}
+      <div class="col-md-4">
+        {{> addRaidRole}}
+      </div>
+      <!--
+      <div class="col-md-8 text-center" style="margin-top: 100px;">
+        <a href="#" class="btn btn-block btn-danger" name="winnerbutton"><h2>Lock Raid</h2></a>
+      </div>
+      -->
+    {{/if}}
+  </div>
+</template>
+
+<template name="noraid">
+  <div>Sorry, no upcoming raid!</div>
+</template>
+
+<template name="addRaidRole">
+  <form class="main form">
+    <div class="form-group">
+      <label class="control-label" for="name">Name</label>
+      <div class="controls">
+        <input name="name" id="name" type="text" value="" placeholder="Name" class="form-control"/>
+      </div>
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+  </form>
+</template>
+
+<template name="editRaid">
+  <h1>Edit Raid</h1>
+</template>
+
+<template name="raidCreate">
+  <div class="row">
+    <div class="col-md-4">
+      <h2>New Raid</h2>
+      <form class="main form">
+        <div class="form-group">
+          <label class="control-label" for="startTime">Raid Date and Time</label>
+          <div class="input-group datetimepicker">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            <input name="startTime" id="startTime" placeholder="Start Time" class="set-raid-time form-control" type="text"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="wing">Wing</label>
+          <div class="controls">
+            <select name="wing" id="wing" class="form-control">
+              {{#each raidWings}}
+                <option value="{{_id}}">{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="control-label" for="encounter">Encounter</label>
+          <div class="controls">
+            <select name="encounter" id="encounter" class="form-control">
+              {{#each raidWingEncounters}}
+                <option value="{{_id}}">{{name}}</option>
+              {{/each}}
+            </select>
+          </div>
+        </div>
+        <input type="submit" value="Submit" class="btn btn-primary"/>
+      </form>
+    </div>
+  </div>
+</template>
