@@ -185,30 +185,41 @@ Template.showRaid.helpers({
   }
 });
 
-Template.raidCreate.onRendered(function(){
+Template.raidForm.onRendered(function(){
   this.$('.datetimepicker').datetimepicker();
   Session.set('selected-wing', $('select#wing').val());
 });
 
-Template.raidCreate.helpers({
+Template.raidForm.helpers({
   raidWings: function(){
     return RaidWings.find().fetch();
   },
   raidWingEncounters: function(){
     encounters = RaidWingEncounters.find({raidwing_id: Session.get('selected-wing')});
     return encounters;
+  },
+  equal: function(one, two){
+    return one == two;
   }
 });
 
-Template.raidCreate.events({
+Template.raidForm.events({
   'submit form': function(e){
     e.preventDefault();
 
-    var id = Raids.insert({
+    obj = {
       startTime: new Date(Date.parse($(e.target).find('[name=startTime]').val())).toISOString(),
       raidwing_id: $(e.target).find('select#wing').val(),
       raidwingencounter_id: $(e.target).find('select#encounter').val()
-    });
+    };
+
+    var id = "";
+    if ($(e.target).find('input#_id').length > 0){
+      id = $(e.target).find('input#_id').val();
+      Raids.update(id, {$set: obj});
+    } else {
+      id = Raids.insert(obj);
+    }
 
     Router.go('/raid/'+id);
   },

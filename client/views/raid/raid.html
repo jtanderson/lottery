@@ -74,6 +74,9 @@
       <div class="col-md-4">
         {{> addRaidRole}}
       </div>
+      <div>
+        <a class="btn btn-link" href="{{pathFor 'raidEdit'}}">Edit</a>
+      </div>
       <!--
       <div class="col-md-8 text-center" style="margin-top: 100px;">
         <a href="#" class="btn btn-block btn-danger" name="winnerbutton"><h2>Lock Raid</h2></a>
@@ -99,46 +102,58 @@
 </template>
 
 <template name="editRaid">
-  <h1>Edit Raid</h1>
+  <div class="row">
+    <div class="col-md-4">
+      <h2>Edit Raid</h2>
+      {{> raidForm}}
+    </div>
+  </div>
 </template>
 
 <template name="raidCreate">
   <div class="row">
     <div class="col-md-4">
       <h2>New Raid</h2>
-      <form class="main form">
-        <div class="form-group">
-          <label class="control-label" for="startTime">Raid Date and Time</label>
-          <div class="input-group datetimepicker">
-            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-            <input name="startTime" id="startTime" placeholder="Start Time" class="set-raid-time form-control" type="text"/>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="wing">Wing</label>
-          <div class="controls">
-            <select name="wing" id="wing" class="form-control">
-              {{#each raidWings}}
-                <option value="{{_id}}">{{name}}</option>
-              {{/each}}
-            </select>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="control-label" for="encounter">Encounter</label>
-          <div class="controls">
-            <select name="encounter" id="encounter" class="form-control">
-              {{#each raidWingEncounters}}
-                <option value="{{_id}}">{{name}}</option>
-              {{/each}}
-            </select>
-          </div>
-        </div>
-        <input type="submit" value="Submit" class="btn btn-primary"/>
-      </form>
+      {{> raidForm}}
     </div>
   </div>
 </template>
+
+<template name="raidForm">
+  <form class="main form">
+    <div class="form-group">
+      <label class="control-label" for="startTime">Raid Date and Time</label>
+      <div class="input-group datetimepicker">
+        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+        <input value="{{friendlyStartTime}}" name="startTime" id="startTime" placeholder="Start Time" class="set-raid-time form-control" type="text"/>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="wing">Wing</label>
+      <div class="controls">
+        <select name="wing" id="wing" class="form-control">
+          {{#each raidWings}}
+            <option {{optionAttributes ..}}>{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label" for="encounter">Encounter</label>
+      <div class="controls">
+        <select name="encounter" id="encounter" class="form-control">
+          {{#each raidWingEncounters}}
+            <option {{optionAttributes ..}}>{{name}}</option>
+          {{/each}}
+        </select>
+      </div>
+    </div>
+    {{#if _id}}
+      <input type="hidden" name="_id" id="_id" value="{{_id}}">
+    {{/if}}
+    <input type="submit" value="Submit" class="btn btn-primary"/>
+  </form>
+  </template>
 
 <template name="raidJumbotron">
   <!-- Main jumbotron for a primary marketing message or call to action -->
