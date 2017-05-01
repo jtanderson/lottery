@@ -20,7 +20,7 @@ Follow steps on https://github.com/jeeeyul/meteor-openshift
 ## TODO:
 
 - [ ] Clean up text/titles from lottery to a more generally approachable site
-- [ ] Add a list of raids, or raid homepage, etc.
+- [x] Add a list of raids, or raid homepage, etc.
 - [ ] Add a general "suggestion-box"
   - [ ] Allow categories of suggestions (raid request, general, wvw, etc.)
 - [ ] Update Admin UI for raids and suggestions
