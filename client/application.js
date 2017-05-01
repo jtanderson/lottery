@@ -171,6 +171,14 @@ Template.showRaid.events({
       return false;
     }
     RaidRoles.update(this._id, {$set: {playerName: charName}});
+  },
+  'click #delete-raid': function(e){
+    var resp = window.confirm("Are you sure you want to delete this raid?");
+
+    if (isAdmin() && resp){
+      Raids.remove(this._id);
+      Router.go('/raid');
+    }
   }
 });
 
